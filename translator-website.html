@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный переводчик сербский-русский | Podgorica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e8f4f8;
+            background: #0a1628;
+        }
+
+        .header {
+            background: 
+                linear-gradient(135deg, rgba(10, 22, 40, 0.7) 0%, rgba(26, 58, 82, 0.6) 50%, rgba(45, 95, 126, 0.7) 100%),
+                url('perast.png') center/cover;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(41, 128, 185, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.2) 0%, transparent 50%);
+            animation: waves 15s ease-in-out infinite;
+        }
+
+        @keyframes waves {
+            0%, 100% { transform: translateY(0px); opacity: 0.3; }
+            50% { transform: translateY(-20px); opacity: 0.5; }
+        }
+
+        .header h1 {
+            font-size: 3.2em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header p {
+            font-size: 1.4em;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+            color: #a8dadc;
+        }
+
+        .languages {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-top: 25px;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #3498db);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 60px;
+            color: #5dade2;
+            position: relative;
+            text-shadow: 0 2px 10px rgba(93, 173, 226, 0.3);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+            margin: 25px auto 0;
+            border-radius: 2px;
+        }
+
+        .about {
+            background: 
+                linear-gradient(180deg, rgba(15, 33, 55, 0.92) 0%, rgba(26, 58, 82, 0.92) 100%),
+                url('https://images.unsplash.com/photo-1601815854424-74949a6dd9bd?w=1920&q=80') center/cover fixed;
+        }
+
+        .about-content {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.15em;
+            line-height: 1.9;
+            color: #d4e6f1;
+        }
+
+        .about-content p {
+            background: rgba(26, 58, 82, 0.4);
+            padding: 25px 35px;
+            border-radius: 15px;
+            border-left: 4px solid #3498db;
+            backdrop-filter: blur(10px);
+        }
+
+        .services {
+            background: 
+                linear-gradient(180deg, rgba(10, 22, 40, 0.95) 0%, rgba(10, 22, 40, 0.95) 100%),
+                url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80') center/cover fixed;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5f7e 100%);
+            padding: 45px 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            text-align: center;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 50px rgba(52, 152, 219, 0.3);
+            border-color: #3498db;
+        }
+
+        .service-icon {
+            font-size: 3.5em;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 5px 15px rgba(52, 152, 219, 0.4));
+        }
+
+        .service-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 18px;
+            color: #5dade2;
+        }
+
+        .service-card p {
+            color: #d4e6f1;
+            line-height: 1.7;
+        }
+
+        .advantages {
+            background: 
+                linear-gradient(135deg, rgba(26, 58, 82, 0.88) 0%, rgba(45, 95, 126, 0.82) 50%, rgba(26, 58, 82, 0.88) 100%),
+                url('boka-bay.png') center/cover fixed;
+            position: relative;
+        }
+
+        .advantages::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M0 50 Q 25 30, 50 50 T 100 50" stroke="rgba(52,152,219,0.1)" fill="none"/></svg>');
+            opacity: 0.3;
+        }
+
+        .advantages .section-title {
+            color: #a8dadc;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .advantage-item {
+            text-align: center;
+            padding: 30px 25px;
+            background: rgba(10, 22, 40, 0.5);
+            border-radius: 15px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .advantage-item:hover {
+            background: rgba(26, 58, 82, 0.6);
+            transform: scale(1.05);
+        }
+
+        .advantage-icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(52, 152, 219, 0.5));
+        }
+
+        .advantage-item h3 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            color: #5dade2;
+        }
+
+        .advantage-item p {
+            color: #d4e6f1;
+        }
+
+        .pricing {
+            background: #0a1628;
+        }
+
+        .contact {
+            background: 
+                linear-gradient(180deg, rgba(15, 33, 55, 0.88) 0%, rgba(26, 58, 82, 0.88) 100%),
+                url('ulcinj.png') center/cover fixed;
+        }
+
+        .contact-info {
+            max-width: 650px;
+            margin: 50px auto;
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5f7e 100%);
+            padding: 60px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 1.15em;
+            color: #d4e6f1;
+            padding: 20px;
+            background: rgba(10, 22, 40, 0.4);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(26, 58, 82, 0.6);
+            transform: translateX(10px);
+        }
+
+        .contact-item-icon {
+            font-size: 2em;
+            margin-right: 25px;
+            color: #5dade2;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .contact-item a {
+            color: #a8dadc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #3498db;
+        }
+
+        .footer {
+            background: #0a1628;
+            color: #d4e6f1;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: all 0.4s ease;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(52, 152, 219, 0.6);
+            background: linear-gradient(135deg, #2ecc71 0%, #3498db 100%);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .section-title {
+                font-size: 2.2em;
+            }
+
+            .services-grid,
+            .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                padding: 40px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Стуков Николай Леонидович</h1>
+            <p>Личный переводчик сербский-русский</p>
+            <div class="languages">🇷🇺 РУССКИЙ ⟷ СЕРБСКИЙ 🇷🇸</div>
+            <a href="#contact" class="cta-button">Связаться со мной</a>
+        </div>
+    </header>
+
+    <section class="section about">
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-content">
+                <p>
+                    Живу в Черногории 7 лет. Имею опыт перевода более 5 лет - очень хорошо владею как сербским, так и русским языком.
+                </p>
+                <p style="margin-top: 20px;">
+                    За это время помогал людям абсолютно везде: сопровождал в государственные учреждения (MUP, полиция, општина), 
+                    к врачам и в больницы, помогал с арендой квартир и оформлением документов, переводил в банках, магазинах, 
+                    на почте и в других местах. Работаю без официальных лицензий - просто помогаю людям понимать друг друга.
+                </p>
+                <p style="margin-top: 20px;">
+                    Знаю, как работают местные учреждения, куда обращаться и что говорить. Помогу разобраться в любой ситуации, 
+                    где нужен перевод с сербского на русский или наоборот.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section services">
+        <div class="container">
+            <h2 class="section-title">Чем могу помочь</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏛️</div>
+                    <h3>Помощь в государственных учреждениях</h3>
+                    <p>Сопровождение в полиции, MUP, общине, налоговой - везде, где нужен перевод с сербского.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3>Визиты к врачу</h3>
+                    <p>Помогу объясниться в больнице, поликлинике, у врача. Переведу диагнозы и рецепты.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📄</div>
+                    <h3>Перевод документов</h3>
+                    <p>Переведу договоры, счета, письма от коммунальных служб, официальные бумаги. Простой перевод без нотариуса.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Аренда и недвижимость</h3>
+                    <p>Помощь при съеме квартиры, общении с арендодателем, оформлении договоров, решении бытовых вопросов.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛒</div>
+                    <h3>Покупки и услуги</h3>
+                    <p>Помогу в магазинах, банках, на почте, при заказе услуг - везде, где нужно общение на сербском.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💬</div>
+                    <h3>Бытовое общение</h3>
+                    <p>Помощь в повседневных ситуациях - разговоры с соседями, мастерами, продавцами, любые житейские вопросы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section advantages">
+        <div class="container">
+            <h2 class="section-title">Преимущества</h2>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">🤗</div>
+                    <h3>Личный подход</h3>
+                    <p>Индивидуальная помощь в каждой ситуации</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">💰</div>
+                    <h3>Доступные цены</h3>
+                    <p>Честные расценки без переплат</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">📍</div>
+                    <h3>Местный житель</h3>
+                    <p>Знаю Подгорицу и местные особенности</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">⏰</div>
+                    <h3>Гибкий график</h3>
+                    <p>Можем договориться о удобном времени</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section pricing" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Стоимость услуг</h2>
+            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <div style="background: white; padding: 50px 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <div style="font-size: 3.5em; color: #667eea; font-weight: bold; margin-bottom: 20px;">10€</div>
+                    <div style="font-size: 1.3em; color: #666; margin-bottom: 30px;">за час работы</div>
+                    <div style="padding: 20px; background: #f8f9fa; border-radius: 10px; margin-top: 30px;">
+                        <p style="font-size: 1.1em; color: #333; margin: 0;">
+                            💬 Цена может обсуждаться индивидуально в зависимости от типа и объёма работы
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-item-icon">📧</div>
+                    <div>
+                        <strong>Email:</strong><br>
+                        <a href="mailto:nikolaistukov38@gmail.com">nikolaistukov38@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">📱</div>
+                    <div>
+                        <strong>Телефон:</strong><br>
+                        <a href="tel:+38267551020">+382 67 551 020</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">💬</div>
+                    <div>
+                        <strong>Telegram / WhatsApp:</strong><br>
+                        <a href="https://t.me/uprtrk">@uprtrk</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">📍</div>
+                    <div>
+                        <strong>Местонахождение:</strong><br>
+                        Podgorica, Montenegro
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Личный переводчик сербский-русский. Podgorica, Montenegro</p>
+        </div>
+    </footer>
+</body>
+</html>
